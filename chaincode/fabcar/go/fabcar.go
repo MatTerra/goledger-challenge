@@ -124,10 +124,11 @@ func (s *SmartContract) createCar(APIstub shim.ChaincodeStubInterface, args []st
 	if len(args) < 5 || len(args) > 6 {
 		return shim.Error("Incorrect number of arguments. Expecting 5 or 6")
 	}
+	var car Car
 	if len(args) == 5 {
-		var car = Car{Make: args[1], Model: args[2], Colour: args[3], Owner: args[4]}
+		car = Car{Make: args[1], Model: args[2], Colour: args[3], Owner: args[4]}
 	} else {		
-		var car = Car{Make: args[1], Model: args[2], Colour: args[3], Owner: args[4], Year: args[5]}
+		car = Car{Make: args[1], Model: args[2], Colour: args[3], Owner: args[4], Year: args[5]}
 	}
 	carAsBytes, _ := json.Marshal(car)
 	APIstub.PutState(args[0], carAsBytes)
